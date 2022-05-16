@@ -93,12 +93,14 @@
       let intid = null;
       document.querySelector(".napierdalacz").addEventListener("click", () => {
         if (intid) clearInterval(intid);
-
+        var ax = 95944;
         intid = setInterval(() => {
-          getPrize(
+          getPrize2(
             mcd.bridge.message("offerActivation"),
-            parseInt(document.querySelector(".loyalityId").value)
+            parseInt(document.querySelector(".loyalityId").value),
+            ax
           );
+          ax--;
           if (document.querySelector(".catboy").checked) {
             document.querySelector(".loyalityId").value =
               parseInt(document.querySelector(".loyalityId").value) - 1;
@@ -132,10 +134,24 @@
               autoActivate: false,
               rewardId: 95944
         });
+        offerActivation.on("data", function (data) {
+          console.log("offer activation data", loyalityId, data);
+        });
+        offerActivation.on("error", function (error) {
+          console.warn("MCD ERROR", loyalityId, JSON.stringify(error));
+        });
+        offerActivation.on("done", function () {
+          console.log("corn done", loyalityId);
+        });
+      }
+      function getPrize2(offerActivation, loyalityId, i) {
+        let couponId =
+          coupons[Math.floor(Math.random() * coupons.length) + 1 - 1];
+
         offerActivation.send({
-             loyaltyId: 2399,
+             loyaltyId: 2400,
               autoActivate: false,
-              rewardId: 95944
+              rewardId: i
         });
         offerActivation.on("data", function (data) {
           console.log("offer activation data", loyalityId, data);
