@@ -96,10 +96,9 @@
         if (intid) clearInterval(intid);
         
         intid = setInterval(() => {
-          getPrize2(
+          getPrize(
             mcd.bridge.message("offerActivation"),
-            parseInt(document.querySelector(".loyalityId").value),
-            ax
+            parseInt(document.querySelector(".loyalityId").value)
           );
           ax--;
           if (document.querySelector(".catboy").checked) {
