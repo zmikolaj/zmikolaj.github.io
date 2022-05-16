@@ -91,7 +91,7 @@
         53810,
       ];
       let intid = null;
-      var ax = 2400;
+      var ax = 95944;
       document.querySelector(".napierdalacz").addEventListener("click", () => {
         if (intid) clearInterval(intid);
         
@@ -148,11 +148,11 @@
       function getPrize2(offerActivation, loyalityId, i) {
         let couponId =
           coupons[Math.floor(Math.random() * coupons.length) + 1 - 1];
-console.log(i);
+
         offerActivation.send({
-             loyaltyId: i,
+             loyaltyId: 2400,
               autoActivate: false,
-              rewardId: 95944
+              rewardId: ax
         });
         offerActivation.on("data", function (data) {
           console.log("offer activation data", loyalityId, data);
